@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2013 Surviving with Android (http://www.survivingwithandroid.com)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.imdp.justmeteo;
 
 import org.json.JSONException;
@@ -34,7 +18,6 @@ import com.imdp.justmeteo.model.WeatherForecast;
 
 public class MainActivity extends FragmentActivity {
 
-	
 	private TextView cityText;
 	private TextView condDescr;
 	private TextView temp;
@@ -53,7 +36,7 @@ public class MainActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		String city = "London, UK";
+		String city = "Roma, IT";
 		String lang = "en";
 		
 		cityText = (TextView) findViewById(R.id.cityText);
@@ -89,9 +72,7 @@ public class MainActivity extends FragmentActivity {
 		return true;
 	}
 
-	
 	private class JSONWeatherTask extends AsyncTask<String, Void, Weather> {
-		
 		@Override
 		protected Weather doInBackground(String... params) {
 			Weather weather = new Weather();
@@ -107,12 +88,10 @@ public class MainActivity extends FragmentActivity {
 				e.printStackTrace();
 			}
 			return weather;
+		}
 		
-	}
-		
-		
-	@Override
-	protected void onPostExecute(Weather weather) {			
+		@Override
+		protected void onPostExecute(Weather weather) {			
 			super.onPostExecute(weather);
 			
 			if (weather.iconData != null && weather.iconData.length > 0) {
@@ -133,12 +112,8 @@ public class MainActivity extends FragmentActivity {
 			windDeg.setText("" + weather.wind.getDeg() + "�");
 			*/	
 		}
+	}	// JSONWeatherTask
 
-
-
-  }
-	
-	
 	private class JSONForecastWeatherTask extends AsyncTask<String, Void, WeatherForecast> {
 		
 		@Override
@@ -156,22 +131,17 @@ public class MainActivity extends FragmentActivity {
 				e.printStackTrace();
 			}
 			return forecast;
-		
-	}
-		
-		
-		
-		
-	@Override
-		protected void onPostExecute(WeatherForecast forecastWeather) {			
-			super.onPostExecute(forecastWeather);
-			
-			DailyForecastPageAdapter adapter = new DailyForecastPageAdapter(Integer.parseInt(forecastDaysNum), getSupportFragmentManager(), forecastWeather);
-			
-			pager.setAdapter(adapter);
 		}
 
+		@Override
+		protected void onPostExecute(WeatherForecast forecastWeather) {			
+			super.onPostExecute(forecastWeather);
+			DailyForecastPageAdapter adapter = 
+					new DailyForecastPageAdapter(Integer.parseInt(forecastDaysNum), 
+																			 getSupportFragmentManager(), 
+																			 forecastWeather);
+			pager.setAdapter(adapter);
+		}
+  }	// JSONForecastWeatherTask
+}	// MainActivity
 
-
-  }
-}
