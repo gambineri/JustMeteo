@@ -6,6 +6,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -36,6 +38,13 @@ public class MainActivity extends FragmentActivity {
 	private static String forecastDaysNum = "3";
 	private ViewPager pager;
 	
+	private boolean isNetworkAvailable() {
+    ConnectivityManager connectivityManager 
+          = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+    return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+  }
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -61,12 +70,16 @@ public class MainActivity extends FragmentActivity {
 		
 		*/
 		
-		
-		JSONWeatherTask task = new JSONWeatherTask();
-		task.execute(new String[]{city,lang});
-		
-		JSONForecastWeatherTask task1 = new JSONForecastWeatherTask();
-		task1.execute(new String[]{city,lang, forecastDaysNum});
+		if (isNetworkAvailable()) {
+			JSONWeatherTask task = new JSONWeatherTask();
+			task.execute(new String[]{city,lang});
+			
+			JSONForecastWeatherTask task1 = new JSONForecastWeatherTask();
+			task1.execute(new String[]{city,lang, forecastDaysNum});
+		}
+		else {
+			
+		}
 
 		
 //*******************************************8		
