@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.imdp.justmeteo.adapter.DailyForecastPageAdapter;
 import com.imdp.justmeteo.database.SQLiteDB;
+import com.imdp.justmeteo.helper.Helper;
 import com.imdp.justmeteo.model.Weather;
 import com.imdp.justmeteo.model.WeatherForecast;
 
@@ -37,8 +38,10 @@ public class MainActivity extends FragmentActivity {
 	
 	private static String forecastDaysNum = "3";
 	private ViewPager pager;
-	
-	private boolean isNetworkAvailable() {
+
+	private Helper mH = new Helper(this.getApplicationContext());
+
+	public boolean isNetworkAvailable2() {
     ConnectivityManager connectivityManager 
           = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
     NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
@@ -51,6 +54,7 @@ public class MainActivity extends FragmentActivity {
 		setContentView(R.layout.activity_main);
 		String city = "Roma, IT";
 		String lang = "en";
+		
 		
 		cityText = (TextView) findViewById(R.id.cityText);
 		temp = (TextView) findViewById(R.id.temp);
@@ -70,15 +74,16 @@ public class MainActivity extends FragmentActivity {
 		
 		*/
 		
-		if (isNetworkAvailable()) {
-			JSONWeatherTask task = new JSONWeatherTask();
-			task.execute(new String[]{city,lang});
-			
-			JSONForecastWeatherTask task1 = new JSONForecastWeatherTask();
-			task1.execute(new String[]{city,lang, forecastDaysNum});
+		if (mH.isNetworkAvailable()) {
+			mH.tL("Ce sta sine che ce stane");
+//			JSONWeatherTask task = new JSONWeatherTask();
+//			task.execute(new String[]{city,lang});
+//			
+//			JSONForecastWeatherTask task1 = new JSONForecastWeatherTask();
+//			task1.execute(new String[]{city,lang, forecastDaysNum});
 		}
 		else {
-			
+			mH.tL("Non ce sta la connessioneeee");
 		}
 
 		
