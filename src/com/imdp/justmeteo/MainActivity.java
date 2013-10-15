@@ -2,6 +2,8 @@ package com.imdp.justmeteo;
 
 import org.json.JSONException;
 
+import android.content.Context;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -11,8 +13,10 @@ import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.imdp.justmeteo.adapter.DailyForecastPageAdapter;
+import com.imdp.justmeteo.database.SQLiteDB;
 import com.imdp.justmeteo.model.Weather;
 import com.imdp.justmeteo.model.WeatherForecast;
 
@@ -63,6 +67,22 @@ public class MainActivity extends FragmentActivity {
 		
 		JSONForecastWeatherTask task1 = new JSONForecastWeatherTask();
 		task1.execute(new String[]{city,lang, forecastDaysNum});
+
+		
+//*******************************************8		
+
+//		Context mCon;
+//		String path = mCon.getDatabasePath("justmeteo").getPath();
+
+		Cursor employees;
+		SQLiteDB db;
+		
+		db = new SQLiteDB(this.getApplicationContext());
+		employees = db.getEmployees(); // you would not typically call this on the main thread
+		employees.moveToFirst();
+		String row = employees.getInt(0) + employees.getString(1) +employees.getString(2); 
+  	Toast.makeText(getBaseContext(), row, Toast.LENGTH_LONG).show();
+
 	}
 
 	@Override
