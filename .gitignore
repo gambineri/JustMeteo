@@ -28,3 +28,7 @@ proguard/
 *.iws
 .idea/
 
+# Added by Massimo
+.metadata/
+.settings/
+.gitignore~

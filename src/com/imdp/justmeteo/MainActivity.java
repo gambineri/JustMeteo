@@ -39,7 +39,7 @@ public class MainActivity extends FragmentActivity {
 	private static String forecastDaysNum = "3";
 	private ViewPager pager;
 
-	private Helper mH = new Helper(this.getApplicationContext());
+	private Helper mH = null;
 
 	public boolean isNetworkAvailable2() {
     ConnectivityManager connectivityManager 
@@ -54,7 +54,8 @@ public class MainActivity extends FragmentActivity {
 		setContentView(R.layout.activity_main);
 		String city = "Roma, IT";
 		String lang = "en";
-		
+
+		mH = new Helper(this.getApplicationContext());
 		
 		cityText = (TextView) findViewById(R.id.cityText);
 		temp = (TextView) findViewById(R.id.temp);
@@ -74,17 +75,18 @@ public class MainActivity extends FragmentActivity {
 		
 		*/
 		
-		if (mH.isNetworkAvailable()) {
-			mH.tL("Ce sta sine che ce stane");
+//		if (mH.isNetworkAvailable()) {
+//		if (isNetworkAvailable2()) {
+//			mH.tL("Ce sta sine che ce stane");
 //			JSONWeatherTask task = new JSONWeatherTask();
 //			task.execute(new String[]{city,lang});
 //			
 //			JSONForecastWeatherTask task1 = new JSONForecastWeatherTask();
 //			task1.execute(new String[]{city,lang, forecastDaysNum});
-		}
-		else {
-			mH.tL("Non ce sta la connessioneeee");
-		}
+//		}
+//		else {
+//			mH.tL("Non ce sta la connessioneeee");
+//		}
 
 		
 //*******************************************8		
