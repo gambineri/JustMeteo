@@ -10,20 +10,25 @@ public class Helper {
 	private Context mContext = null;
 	
 	public Helper(Context context) {
-		// TODO Auto-generated constructor stub
+	  mContext = context;
 	}
 
   /*******************************************
    * Toast helper functions
    **/
   public void tL(String msg_long_duration) {
-  	Toast.makeText(mContext, msg_long_duration, Toast.LENGTH_LONG).show();
+    doToast(msg_long_duration, Toast.LENGTH_LONG);
   }
   
   public void tS(String msg_short_duration) {
-  	Toast.makeText(mContext, msg_short_duration, Toast.LENGTH_SHORT).show();
+    doToast(msg_short_duration, Toast.LENGTH_SHORT);
   }
-  
+
+  private void doToast(String msg, int duration) {
+    if (mContext != null) 
+      Toast.makeText(mContext, msg, duration).show();	  
+  }
+    
   /*******************************************
    * Connectivity
    **/
