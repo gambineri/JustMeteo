@@ -1,9 +1,10 @@
 JustMeteo
 =========
 
-A no-alarmist drama-free weather forecast app, just a simple app to get info 
-on the weather for the weekend, or for any other day you may feel the need 
-or be able to find your way out.
+Storm is just a storm, not a water bomb.
+
+Drama-free weather forecast app, just a simple app to get info 
+on the weather for the weekend, or for any other day you can find your way out.
 
 
 ----------------------------------------------------------------------------
